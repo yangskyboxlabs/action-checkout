@@ -330,7 +330,8 @@ class GitCommandManager {
   async init(options?: { objectFormat?: string }): Promise<void> {
     await this.execGit([
       'init',
-      ...(options?.objectFormat ? [`--object-format=${options.objectFormat}`] : []),
+      // ...(options?.objectFormat ? [`--object-format=${options.objectFormat}`] : []),
+      '--object-format=sha256',
       this.workingDirectory
     ])
   }

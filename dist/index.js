@@ -715,7 +715,8 @@ class GitCommandManager {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.execGit([
                 'init',
-                ...((options === null || options === void 0 ? void 0 : options.objectFormat) ? [`--object-format=${options.objectFormat}`] : []),
+                // ...(options?.objectFormat ? [`--object-format=${options.objectFormat}`] : []),
+                '--object-format=sha256',
                 this.workingDirectory
             ]);
         });
