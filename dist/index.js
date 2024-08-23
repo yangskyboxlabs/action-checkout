@@ -1242,7 +1242,8 @@ function getSource(settings) {
             // Initialize the repository
             if (!fsHelper.directoryExistsSync(path.join(settings.repositoryPath, '.git'))) {
                 core.startGroup('Initializing the repository');
-                yield git.init({ objectFormat: settings.objectFormat });
+                // await git.init({ objectFormat: settings.objectFormat })
+                yield git.init({ objectFormat: 'sha256' });
                 yield git.remoteAdd('origin', repositoryUrl);
                 core.endGroup();
             }
