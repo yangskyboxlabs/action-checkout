@@ -711,9 +711,13 @@ class GitCommandManager {
     getWorkingDirectory() {
         return this.workingDirectory;
     }
-    init() {
+    init(options) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield this.execGit(['init', this.workingDirectory]);
+            yield this.execGit([
+                'init',
+                ...((options === null || options === void 0 ? void 0 : options.objectFormat) ? [`--object-format=${options.objectFormat}`] : []),
+                this.workingDirectory
+            ]);
         });
     }
     isDetached() {
@@ -1238,7 +1242,7 @@ function getSource(settings) {
             // Initialize the repository
             if (!fsHelper.directoryExistsSync(path.join(settings.repositoryPath, '.git'))) {
                 core.startGroup('Initializing the repository');
-                yield git.init();
+                yield git.init({ objectFormat: settings.objectFormat });
                 yield git.remoteAdd('origin', repositoryUrl);
                 core.endGroup();
             }
